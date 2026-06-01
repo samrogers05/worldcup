@@ -1,5 +1,6 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
 import { getSupabaseServerClient } from './supabase'
 import bcrypt from 'bcryptjs'
 
@@ -55,6 +56,11 @@ export async function savePredictions(
     )
 
   if (error) return { error: 'Failed to save. Please try again.' }
+
+  revalidatePath('/')
+  revalidatePath('/leaderboard')
+  revalidatePath('/standings')
+  revalidatePath('/community')
   return { success: true }
 }
 
@@ -105,6 +111,11 @@ export async function saveKnockoutPredictions(
     )
 
   if (error) return { error: 'Failed to save. Please try again.' }
+
+  revalidatePath('/')
+  revalidatePath('/leaderboard')
+  revalidatePath('/standings')
+  revalidatePath('/community')
   return { success: true }
 }
 
