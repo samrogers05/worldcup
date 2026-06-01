@@ -3,7 +3,7 @@ import AdminClient from './AdminClient'
 
 export type AdminGame = {
   id: string
-  stage: 'group' | 'R16' | 'QF' | 'SF' | 'F'
+  stage: 'group' | 'R32' | 'R16' | 'QF' | 'SF' | 'F'
   group_name: string | null
   home_team: string
   away_team: string
