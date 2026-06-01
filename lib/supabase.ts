@@ -12,15 +12,18 @@ export type Database = {
         Row: {
           id: string
           name: string
+          password: string | null
           created_at: string
         }
         Insert: {
           id?: string
           name: string
+          password?: string | null
           created_at?: string
         }
         Update: {
           name?: string
+          password?: string | null
         }
         Relationships: []
       }
