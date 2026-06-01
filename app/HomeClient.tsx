@@ -46,7 +46,7 @@ export default function HomeClient({ leaderboard }: Props) {
 
         {/* ── Header ── */}
         <header className="retro-header px-6 py-10 text-center">
-          <p className="orbitron text-retro-muted text-[30px] uppercase tracking-[0.4em] mb-2">
+          <p className="orbitron text-retro-muted text-[22px] uppercase tracking-[0.4em] mb-2">
             FIFA
           </p>
           <div
@@ -115,21 +115,21 @@ export default function HomeClient({ leaderboard }: Props) {
                       <span className="flex items-center gap-3">
                         <RankBadge i={i} />
                         <div>
-                          <span className={`font-bold text-[32px] uppercase tracking-wide block ${
+                          <span className={`font-bold text-[24px] uppercase tracking-wide block ${
                             entry.id === userId ? 'text-neon' : 'text-retro-white'
                           }`}>
                             {entry.name}
                           </span>
                           {entry.id === userId && (
-                            <span className="text-[18px] text-neon uppercase tracking-widest">You</span>
+                            <span className="text-[14px] text-neon uppercase tracking-widest">You</span>
                           )}
                         </div>
                       </span>
-                      <span className="orbitron text-[48px] font-black" style={{
+                      <span className="orbitron text-[36px] font-black" style={{
                         color: i === 0 ? '#ffd700' : i === 1 ? '#b8c4d0' : i === 2 ? '#cd7f32' : '#e8f4fd'
                       }}>
                         {entry.points}
-                        <span className="orbitron text-[20px] text-retro-muted font-normal ml-1">PTS</span>
+                        <span className="orbitron text-[15px] text-retro-muted font-normal ml-1">PTS</span>
                       </span>
                     </li>
                   ))}
@@ -139,7 +139,7 @@ export default function HomeClient({ leaderboard }: Props) {
               <div className="border-t border-pitch-border mt-4 pt-4 shrink-0">
                 <Link
                   href="/leaderboard"
-                  className="block text-center text-neon text-[20px] uppercase tracking-widest hover:text-neon-dim transition-colors py-1"
+                  className="block text-center text-neon text-[15px] uppercase tracking-widest hover:text-neon-dim transition-colors py-1"
                 >
                   View Full Leaderboard →
                 </Link>
