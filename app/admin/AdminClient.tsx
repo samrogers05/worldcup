@@ -497,7 +497,7 @@ function KnockoutGameRow({
     const a = away !== '' ? parseInt(away, 10) : null
     setSaving(true); setMsg('')
     const result = await upsertKnockoutGame(
-      game.id, game.stage as 'R16' | 'QF' | 'SF' | 'F',
+      game.id, game.stage as 'R32' | 'R16' | 'QF' | 'SF' | 'F',
       homeTeam, awayTeam, game.kickoff_time, h, a, game.match_number,
     )
     setSaving(false)
@@ -543,7 +543,7 @@ function AddKnockoutGameForm({
   nextMatchNumber,
   onAdded,
 }: {
-  stage: 'R16' | 'QF' | 'SF' | 'F'
+  stage: 'R32' | 'R16' | 'QF' | 'SF' | 'F'
   nextMatchNumber: number
   onAdded: (game: AdminGame) => void
 }) {
