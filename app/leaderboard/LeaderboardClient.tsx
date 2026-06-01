@@ -40,7 +40,7 @@ function DrillDownModal({
   })
 
   const totalPts = filtered?.reduce((sum, r) => sum + (r.points ?? 0), 0) ?? 0
-  const maxLeft  = filtered?.reduce((sum, r) => sum + (r.points === null ? 2 : 0), 0) ?? 0
+  const maxLeft  = filtered?.reduce((sum, r) => sum + (r.points === null ? 3 : 0), 0) ?? 0
 
   function stageLabel(row: DrillDownRow) {
     if (row.stage === 'group') return `Group ${row.groupName}`
@@ -143,9 +143,14 @@ function DrillDownModal({
                       <td className="py-2.5 text-right">
                         {!played ? (
                           <span className="text-pitch-border orbitron text-xs">—</span>
-                        ) : pts === 2 ? (
+                        ) : pts === 3 ? (
                           <span className="orbitron text-xs font-bold px-1.5 py-0.5 rounded-sm"
                             style={{ background: 'rgba(255,215,0,0.15)', color: '#ffd700', border: '1px solid rgba(255,215,0,0.4)' }}>
+                            +3
+                          </span>
+                        ) : pts === 2 ? (
+                          <span className="orbitron text-xs font-bold px-1.5 py-0.5 rounded-sm"
+                            style={{ background: 'rgba(184,196,208,0.15)', color: '#b8c4d0', border: '1px solid rgba(184,196,208,0.4)' }}>
                             +2
                           </span>
                         ) : pts === 1 ? (

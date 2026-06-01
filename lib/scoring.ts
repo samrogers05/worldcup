@@ -4,10 +4,13 @@ export function computePoints(
   actualHome: number,
   actualAway: number,
 ): number {
-  let pts = 0
-  // 1pt for correct result direction (win/draw/loss)
-  if (Math.sign(predictedHome - predictedAway) === Math.sign(actualHome - actualAway)) pts++
-  // 1pt for exact score
-  if (predictedHome === actualHome && predictedAway === actualAway) pts++
-  return pts
+  const exact = predictedHome === actualHome && predictedAway === actualAway
+  if (exact) return 3
+
+  const predictedDir = Math.sign(predictedHome - predictedAway)
+  const actualDir    = Math.sign(actualHome - actualAway)
+  if (predictedDir !== actualDir) return 0
+
+  // Correct direction: 2pts for correctly calling a draw, 1pt for correct win direction
+  return actualDir === 0 ? 2 : 1
 }

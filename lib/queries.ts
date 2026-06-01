@@ -47,7 +47,7 @@ export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
       else entry.knockoutPoints += pts
       entry.points += pts
     } else {
-      entry.maxPossible += 2
+      entry.maxPossible += 3
     }
   }
 

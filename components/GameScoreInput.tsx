@@ -125,16 +125,24 @@ function ResultBadge({
 }: {
   predictedHome: number; predictedAway: number; actualHome: number; actualAway: number
 }) {
-  const exact     = predictedHome === actualHome && predictedAway === actualAway
-  const direction = Math.sign(predictedHome - predictedAway) === Math.sign(actualHome - actualAway)
+  const exact        = predictedHome === actualHome && predictedAway === actualAway
+  const predictedDir = Math.sign(predictedHome - predictedAway)
+  const actualDir    = Math.sign(actualHome - actualAway)
+  const correctDir   = predictedDir === actualDir
 
   if (exact) return (
     <span className="orbitron text-xs font-bold px-2 py-0.5 rounded-sm"
       style={{ background: 'rgba(255,215,0,0.15)', color: '#ffd700', border: '1px solid rgba(255,215,0,0.4)' }}>
+      +3
+    </span>
+  )
+  if (correctDir && actualDir === 0) return (
+    <span className="orbitron text-xs font-bold px-2 py-0.5 rounded-sm"
+      style={{ background: 'rgba(184,196,208,0.15)', color: '#b8c4d0', border: '1px solid rgba(184,196,208,0.4)' }}>
       +2
     </span>
   )
-  if (direction) return (
+  if (correctDir) return (
     <span className="orbitron text-xs font-bold px-2 py-0.5 rounded-sm"
       style={{ background: 'rgba(0,255,135,0.1)', color: '#00ff87', border: '1px solid rgba(0,255,135,0.3)' }}>
       +1
