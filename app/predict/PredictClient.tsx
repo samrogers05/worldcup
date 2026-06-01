@@ -233,7 +233,7 @@ export default function PredictClient({ games, lockTime }: Props) {
                 onClick={() => handleSave(activeGroup)}
                 disabled={savingGroup === activeGroup || filledCount === 0}
                 className="retro-btn flex-1"
-                style={{ fontSize: '16px', padding: '10px 16px' }}
+                style={{ fontSize: '13px', padding: '8px 14px' }}
               >
                 {savingGroup === activeGroup ? 'SAVING...' : `SAVE GROUP ${activeGroup}`}
               </button>

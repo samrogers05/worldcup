@@ -48,9 +48,9 @@ export default function GameScoreInput({
           <TeamNameBadge
             name={homeTeam}
             align="left"
-            flagSize="w-[28px]"
-            textSize="text-[18px]"
-            className="min-w-[110px]"
+            flagSize="w-[22px]"
+            textSize="text-[13px]"
+            className="min-w-[80px]"
           />
         </div>
 
@@ -92,9 +92,9 @@ export default function GameScoreInput({
           <TeamNameBadge
             name={awayTeam}
             align="right"
-            flagSize="w-[28px]"
-            textSize="text-[18px]"
-            className="min-w-[110px]"
+            flagSize="w-[22px]"
+            textSize="text-[13px]"
+            className="min-w-[80px]"
           />
         </div>
       </div>

@@ -46,13 +46,13 @@ export default function HomeClient({ leaderboard }: Props) {
 
         {/* ── Header ── */}
         <header className="retro-header px-6 py-10 text-center">
-          <p className="orbitron text-retro-muted text-[13px] uppercase tracking-[0.4em] mb-2">
+          <p className="orbitron text-retro-muted text-[10px] uppercase tracking-[0.4em] mb-1">
             FIFA
           </p>
           <div
             className="orbitron font-black text-neon leading-none"
             style={{
-              fontSize: 'clamp(40px, 8vw, 80px)',
+              fontSize: 'clamp(24px, 5vw, 52px)',
               textShadow: '0 0 60px rgba(0,255,135,0.55), 0 0 20px rgba(0,255,135,0.8)',
               letterSpacing: '-0.02em',
             }}
@@ -60,12 +60,12 @@ export default function HomeClient({ leaderboard }: Props) {
             2026
           </div>
           <h1
-            className="pixel-title text-retro-white mt-3"
-            style={{ fontSize: 'clamp(9px, 1.4vw, 14px)' }}
+            className="pixel-title text-retro-white mt-2"
+            style={{ fontSize: 'clamp(7px, 1vw, 10px)' }}
           >
             WORLD CUP
           </h1>
-          <p className="orbitron text-retro-muted text-xs uppercase tracking-[0.3em] mt-2">
+          <p className="orbitron text-retro-muted text-[9px] uppercase tracking-[0.3em] mt-1">
             Family Predictions
           </p>
         </header>
@@ -81,7 +81,7 @@ export default function HomeClient({ leaderboard }: Props) {
               <p className="text-retro-muted text-[10px] uppercase tracking-[0.25em] mb-2">
                 Player One
               </p>
-              <h2 className="orbitron font-black text-3xl tracking-wide text-retro-white truncate">
+              <h2 className="orbitron font-black text-xl tracking-wide text-retro-white truncate">
                 {mounted && userName
                   ? userName.toUpperCase()
                   : <span className="text-pitch-border animate-pulse">LOADING...</span>}
@@ -115,21 +115,21 @@ export default function HomeClient({ leaderboard }: Props) {
                       <span className="flex items-center gap-3">
                         <RankBadge i={i} />
                         <div>
-                          <span className={`font-bold text-[16px] uppercase tracking-wide block ${
+                          <span className={`font-bold text-[13px] uppercase tracking-wide block ${
                             entry.id === userId ? 'text-neon' : 'text-retro-white'
                           }`}>
                             {entry.name}
                           </span>
                           {entry.id === userId && (
-                            <span className="text-[11px] text-neon uppercase tracking-widest">You</span>
+                            <span className="text-[9px] text-neon uppercase tracking-widest">You</span>
                           )}
                         </div>
                       </span>
-                      <span className="orbitron text-[22px] font-black" style={{
+                      <span className="orbitron text-[16px] font-black" style={{
                         color: i === 0 ? '#ffd700' : i === 1 ? '#b8c4d0' : i === 2 ? '#cd7f32' : '#e8f4fd'
                       }}>
                         {entry.points}
-                        <span className="orbitron text-[11px] text-retro-muted font-normal ml-1">PTS</span>
+                        <span className="orbitron text-[9px] text-retro-muted font-normal ml-1">PTS</span>
                       </span>
                     </li>
                   ))}
@@ -176,7 +176,7 @@ function BigStat({ label, value, color }: { label: string; value: string | numbe
   return (
     <div className="retro-card p-5 text-center">
       <div
-        className="orbitron text-3xl font-black leading-none mb-2"
+        className="orbitron text-2xl font-black leading-none mb-1"
         style={{ color, textShadow: `0 0 20px ${color}55` }}
       >
         {value}
