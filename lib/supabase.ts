@@ -50,7 +50,7 @@ export type Database = {
           created_at?: string
         }
         Update: {
-          stage?: 'group' | 'R16' | 'QF' | 'SF' | 'F'
+          stage?: 'group' | 'R32' | 'R16' | 'QF' | 'SF' | 'F'
           group_name?: string | null
           home_team?: string
           away_team?: string
