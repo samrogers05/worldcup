@@ -60,10 +60,11 @@ export async function setGroupLockTime(isoTime: string): Promise<Result> {
 }
 
 export async function setRoundOpen(
-  round: 'R16' | 'QF' | 'SF' | 'F',
+  round: 'R32' | 'R16' | 'QF' | 'SF' | 'F',
   open: boolean,
 ): Promise<Result> {
   const keyMap: Record<string, string> = {
+    R32: 'r32_predictions_open',
     R16: 'r16_predictions_open',
     QF: 'qf_predictions_open',
     SF: 'sf_predictions_open',
@@ -120,7 +121,7 @@ export async function clearGameResult(gameId: string): Promise<Result> {
 
 export async function upsertKnockoutGame(
   gameId: string | null,
-  stage: 'R16' | 'QF' | 'SF' | 'F',
+  stage: 'R32' | 'R16' | 'QF' | 'SF' | 'F',
   homeTeam: string,
   awayTeam: string,
   kickoffTime: string | null,
