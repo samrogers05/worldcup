@@ -9,6 +9,7 @@ import type { CommunityGame, CommunityPrediction } from './page'
 
 const GROUPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
 const KNOCKOUT_ROUNDS = [
+  { key: 'R32',  label: 'R32'   },
   { key: 'R16',  label: 'R16'   },
   { key: 'QF',   label: 'QF'    },
   { key: 'SF',   label: 'SF'    },
@@ -33,6 +34,7 @@ function tally(predictions: CommunityPrediction[]) {
 
 function stageDisplay(game: CommunityGame) {
   if (game.stage === 'group') return `Group ${game.group_name}`
+  if (game.stage === 'R32')   return 'Round of 32'
   if (game.stage === 'R16')   return 'Round of 16'
   if (game.stage === 'QF')    return 'Quarter-final'
   if (game.stage === 'SF')    return 'Semi-final'
@@ -291,7 +293,7 @@ export default function CommunityClient({ games }: { games: CommunityGame[] }) {
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
   const [stagePick, setStagePick]         = useState<StagePick>('group')
   const [activeGroup, setActiveGroup]     = useState('A')
-  const [activeRound, setActiveRound]     = useState<'R16' | 'QF' | 'SF' | 'F'>('R16')
+  const [activeRound, setActiveRound]     = useState<'R32' | 'R16' | 'QF' | 'SF' | 'F'>('R32')
   const [selectedGameId, setSelectedGameId] = useState<string | null>(null)
   const [showDetail, setShowDetail]       = useState(false)
 

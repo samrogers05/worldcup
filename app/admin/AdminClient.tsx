@@ -563,7 +563,7 @@ function AddKnockoutGameForm({
     if ('error' in result) { setMsg(result.error); return }
     onAdded({
       id: result.id!,
-      stage,
+      stage: stage as AdminGame['stage'],
       group_name: null,
       home_team: homeTeam.trim(),
       away_team: awayTeam.trim(),
