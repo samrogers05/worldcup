@@ -207,7 +207,7 @@ export default function PredictClient({ games, lockTime }: Props) {
               {activeGames.map(game => (
                 <div
                   key={game.id}
-                  className="rounded-sm p-6"
+                  className="rounded-sm p-3"
                   style={{ background: 'rgba(6,13,30,0.7)', border: '1px solid #1e3a5f' }}
                 >
                   <GameScoreInput

@@ -45,7 +45,7 @@ export default function HomeClient({ leaderboard }: Props) {
       <div className="page-root">
 
         {/* ── Header ── */}
-        <header className="retro-header px-6 py-10 text-center">
+        <header className="retro-header px-6 py-4 text-center">
           <p className="orbitron text-retro-muted text-[10px] uppercase tracking-[0.4em] mb-1">
             FIFA
           </p>
@@ -71,13 +71,13 @@ export default function HomeClient({ leaderboard }: Props) {
         </header>
 
         {/* ── Content ── */}
-        <main className="page-container py-8 space-y-6">
+        <main className="page-container py-4 space-y-4">
 
           {/* Row 1: Player card + Top Predictors, side by side */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
             {/* Player card */}
-            <div className="retro-card p-8 pixel-corners">
+            <div className="retro-card p-4 pixel-corners">
               <p className="text-retro-muted text-[10px] uppercase tracking-[0.25em] mb-2">
                 Player One
               </p>
@@ -94,7 +94,7 @@ export default function HomeClient({ leaderboard }: Props) {
             </div>
 
             {/* Top Predictors */}
-            <div className="retro-card p-8 flex flex-col">
+            <div className="retro-card p-4 flex flex-col">
               <h3 className="pixel-title-xs text-retro-muted uppercase tracking-widest mb-5 shrink-0">
                 Top Predictors
               </h3>
@@ -174,7 +174,7 @@ export default function HomeClient({ leaderboard }: Props) {
 
 function BigStat({ label, value, color }: { label: string; value: string | number; color: string }) {
   return (
-    <div className="retro-card p-5 text-center">
+    <div className="retro-card p-3 text-center">
       <div
         className="orbitron text-2xl font-black leading-none mb-1"
         style={{ color, textShadow: `0 0 20px ${color}55` }}
@@ -198,7 +198,7 @@ function NavTile({
   return (
     <Link
       href={href}
-      className="retro-card flex flex-col justify-between p-8 h-72 group transition-all duration-150 overflow-hidden"
+      className="retro-card flex flex-col justify-between p-5 h-44 group transition-all duration-150 overflow-hidden"
       style={{ borderColor: '#1e3a5f' }}
       onMouseEnter={e => {
         const el = e.currentTarget
