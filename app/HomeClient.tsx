@@ -60,8 +60,8 @@ export default function HomeClient({ leaderboard }: Props) {
             2026
           </div>
           <h1
-            className="pixel-title text-retro-white mt-2"
-            style={{ fontSize: 'clamp(7px, 1vw, 10px)' }}
+            className="pixel-title mt-2"
+            style={{ fontSize: 'clamp(14px, 2vw, 20px)', color: '#ffd700', textShadow: '0 0 12px rgba(255,215,0,0.5)' }}
           >
             WORLD CUP
           </h1>
