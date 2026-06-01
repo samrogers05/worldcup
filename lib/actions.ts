@@ -127,8 +127,12 @@ export async function registerUser(
     .maybeSingle() as unknown as { data: { id: string; name: string; password: string | null } | null }
 
   if (existing) {
-    // Login path — verify password
-    if (!existing.password) return { error: 'This account has no password set. Contact the admin.' }
+    if (!existing.password) {
+      // No password set yet — save this as their password and log in
+      const hash = await bcrypt.hash(password, 10)
+      await supabase.from('users').update({ password: hash }).eq('id', existing.id)
+      return { id: existing.id, name: existing.name }
+    }
     const match = await bcrypt.compare(password, existing.password)
     if (!match) return { error: 'Incorrect password.' }
     return { id: existing.id, name: existing.name }
