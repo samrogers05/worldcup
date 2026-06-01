@@ -181,10 +181,12 @@ function DrillDownModal({
 // Main component
 // ----------------------------------------------------------------
 
-export default function LeaderboardClient({ leaderboard }: { leaderboard: LeaderboardEntry[] }) {
+export default function LeaderboardClient({ leaderboard, lockTime }: { leaderboard: LeaderboardEntry[], lockTime: string | null }) {
   const [filter, setFilter]             = useState<Filter>('all')
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
   const [selected, setSelected]         = useState<LeaderboardEntry | null>(null)
+
+  const isLocked = lockTime ? new Date() >= new Date(lockTime) : false
 
   useEffect(() => { setCurrentUserId(localStorage.getItem('wc_user_id')) }, [])
 
@@ -266,8 +268,8 @@ export default function LeaderboardClient({ leaderboard }: { leaderboard: Leader
                     return (
                       <tr
                         key={entry.id}
-                        onClick={() => setSelected(entry)}
-                        className="border-b border-pitch-border cursor-pointer transition-colors hover:bg-pitch-mid"
+                        onClick={() => { if (isLocked || entry.id === currentUserId) setSelected(entry) }}
+                        className={`border-b border-pitch-border transition-colors hover:bg-pitch-mid ${isLocked || entry.id === currentUserId ? 'cursor-pointer' : 'cursor-default'}`}
                         style={isYou ? { background: 'rgba(0,255,135,0.04)', borderLeft: '2px solid #00ff87' } : {}}
                       >
                         <td className="py-3 px-4">
