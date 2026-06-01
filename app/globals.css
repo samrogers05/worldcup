@@ -288,8 +288,14 @@ body::after {
   max-width: 120rem;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+@media (min-width: 640px) {
+  .page-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 /* Pixel corner decoration (just for flair on big cards) */

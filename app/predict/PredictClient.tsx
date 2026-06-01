@@ -162,7 +162,7 @@ export default function PredictClient({ games, lockTime }: Props) {
       <div className="page-container py-6 space-y-6">
 
         {/* Group tabs — flex, each tab fills equal width */}
-        <div className="flex gap-2">
+        <div className="flex gap-1 sm:gap-2">
           {GROUPS.map(g => {
             const gGames = groupedGames[g] ?? []
             const filled = gGames.filter(gm => { const p = predictions[gm.id]; return p && p.home !== '' && p.away !== '' }).length
@@ -172,7 +172,7 @@ export default function PredictClient({ games, lockTime }: Props) {
               <button
                 key={g}
                 onClick={() => setActiveGroup(g)}
-                className={`retro-tab relative flex-1 h-14 font-bold text-base ${activeGroup === g ? 'active' : ''}`}
+                className={`retro-tab relative flex-1 h-9 sm:h-14 font-bold text-sm sm:text-base ${activeGroup === g ? 'active' : ''}`}
               >
                 {g}
                 {complete && (
@@ -189,7 +189,7 @@ export default function PredictClient({ games, lockTime }: Props) {
         </div>
 
         {/* Group card */}
-        <div className="retro-card p-8">
+        <div className="retro-card p-3 sm:p-8">
 
           {/* Card header */}
           <div className="flex items-center justify-between mb-8">

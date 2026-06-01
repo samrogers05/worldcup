@@ -251,12 +251,12 @@ export default function LeaderboardClient({ leaderboard, lockTime }: { leaderboa
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-pitch-border">
-                    <th className="py-2.5 px-4 text-[20px] text-retro-muted font-bold uppercase tracking-wider text-left w-10">#</th>
-                    <th className="py-2.5 text-[20px] text-retro-muted font-bold uppercase tracking-wider text-left">Name</th>
-                    <th className="py-2.5 px-2 text-[20px] text-retro-muted font-bold uppercase tracking-wider text-right">Grp</th>
-                    <th className="py-2.5 px-2 text-[20px] text-retro-muted font-bold uppercase tracking-wider text-right">KO</th>
-                    <th className="py-2.5 px-2 text-[20px] text-retro-muted font-bold uppercase tracking-wider text-right">Total</th>
-                    <th className="py-2.5 px-4 text-[20px] text-retro-muted font-bold uppercase tracking-wider text-right hidden sm:table-cell">+Max</th>
+                    <th className="py-2.5 px-2 sm:px-4 text-[11px] sm:text-[20px] text-retro-muted font-bold uppercase tracking-wider text-left w-8 sm:w-10">#</th>
+                    <th className="py-2.5 text-[11px] sm:text-[20px] text-retro-muted font-bold uppercase tracking-wider text-left">Name</th>
+                    <th className="py-2.5 px-1 sm:px-2 text-[11px] sm:text-[20px] text-retro-muted font-bold uppercase tracking-wider text-right hidden sm:table-cell">Grp</th>
+                    <th className="py-2.5 px-1 sm:px-2 text-[11px] sm:text-[20px] text-retro-muted font-bold uppercase tracking-wider text-right hidden sm:table-cell">KO</th>
+                    <th className="py-2.5 px-2 text-[11px] sm:text-[20px] text-retro-muted font-bold uppercase tracking-wider text-right">Pts</th>
+                    <th className="py-2.5 px-2 sm:px-4 text-[11px] sm:text-[20px] text-retro-muted font-bold uppercase tracking-wider text-right hidden sm:table-cell">+Max</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -272,33 +272,33 @@ export default function LeaderboardClient({ leaderboard, lockTime }: { leaderboa
                         className={`border-b border-pitch-border transition-colors hover:bg-pitch-mid ${isLocked || entry.id === currentUserId ? 'cursor-pointer' : 'cursor-default'}`}
                         style={isYou ? { background: 'rgba(0,255,135,0.04)', borderLeft: '2px solid #00ff87' } : {}}
                       >
-                        <td className="py-3 px-4">
+                        <td className="py-2 sm:py-3 px-2 sm:px-4">
                           <RankCell i={i} />
                         </td>
-                        <td className="py-3">
-                          <span className={`font-semibold text-[32px] uppercase tracking-wide ${isYou ? 'text-neon' : 'text-retro-white'}`}>
+                        <td className="py-2 sm:py-3">
+                          <span className={`font-semibold text-[14px] sm:text-[32px] uppercase tracking-wide ${isYou ? 'text-neon' : 'text-retro-white'}`}>
                             {entry.name}
                           </span>
                           {isYou && (
-                            <span className="ml-2 text-[18px] text-neon uppercase tracking-widest">YOU</span>
+                            <span className="ml-1 sm:ml-2 text-[10px] sm:text-[18px] text-neon uppercase tracking-widest">YOU</span>
                           )}
                         </td>
-                        <td className="py-3 px-2 text-right orbitron">
+                        <td className="py-2 sm:py-3 px-1 sm:px-2 text-right orbitron hidden sm:table-cell">
                           <span className={`text-[24px] ${filter === 'group' ? 'text-retro-white font-bold' : 'text-retro-muted'}`}>
                             {entry.groupPoints}
                           </span>
                         </td>
-                        <td className="py-3 px-2 text-right orbitron">
+                        <td className="py-2 sm:py-3 px-1 sm:px-2 text-right orbitron hidden sm:table-cell">
                           <span className={`text-[24px] ${filter === 'knockout' ? 'text-retro-white font-bold' : 'text-retro-muted'}`}>
                             {entry.knockoutPoints}
                           </span>
                         </td>
-                        <td className="py-3 px-2 text-right orbitron">
-                          <span className={`text-[28px] font-bold ${isYou ? 'text-neon' : 'text-retro-white'}`}>
+                        <td className="py-2 sm:py-3 px-2 text-right orbitron">
+                          <span className={`text-[16px] sm:text-[28px] font-bold ${isYou ? 'text-neon' : 'text-retro-white'}`}>
                             {pts}
                           </span>
                         </td>
-                        <td className="py-3 px-4 text-right orbitron text-retro-muted text-[24px] hidden sm:table-cell">
+                        <td className="py-2 sm:py-3 px-2 sm:px-4 text-right orbitron text-retro-muted text-[24px] hidden sm:table-cell">
                           +{entry.maxPossible}
                         </td>
                       </tr>
@@ -320,15 +320,15 @@ export default function LeaderboardClient({ leaderboard, lockTime }: { leaderboa
 
 function RankCell({ i }: { i: number }) {
   if (i === 0) return (
-    <span className="orbitron text-[24px] font-bold rank-gold">1</span>
+    <span className="orbitron text-[13px] sm:text-[24px] font-bold rank-gold">1</span>
   )
   if (i === 1) return (
-    <span className="orbitron text-[24px] font-bold rank-silver">2</span>
+    <span className="orbitron text-[13px] sm:text-[24px] font-bold rank-silver">2</span>
   )
   if (i === 2) return (
-    <span className="orbitron text-[24px] font-bold rank-bronze">3</span>
+    <span className="orbitron text-[13px] sm:text-[24px] font-bold rank-bronze">3</span>
   )
   return (
-    <span className="orbitron text-[24px] font-bold text-retro-muted">{i + 1}</span>
+    <span className="orbitron text-[13px] sm:text-[24px] font-bold text-retro-muted">{i + 1}</span>
   )
 }
