@@ -1,6 +1,8 @@
 import { getSupabaseServerClient } from '@/lib/supabase'
 import CommunityClient from './CommunityClient'
 
+export const dynamic = 'force-dynamic'
+
 export type CommunityPrediction = {
   userId: string
   userName: string

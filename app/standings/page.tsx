@@ -1,5 +1,7 @@
 import { getSupabaseServerClient } from '@/lib/supabase'
 import { computeGroupStandings } from '@/lib/standings'
+
+export const dynamic = 'force-dynamic'
 import type { StandingsRow } from '@/lib/standings'
 import StandingsClient from './StandingsClient'
 
