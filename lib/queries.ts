@@ -47,8 +47,13 @@ export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
       else entry.knockoutPoints += pts
       entry.points += pts
     } else {
-      entry.maxPossible += 3
+      entry.maxPossible += 3  // unplayed: could still earn 3pts
     }
+  }
+
+  // maxPossible = points already earned + best case for remaining games
+  for (const entry of map.values()) {
+    entry.maxPossible += entry.points
   }
 
   return Array.from(map.values()).sort((a, b) => b.points - a.points || a.name.localeCompare(b.name))
