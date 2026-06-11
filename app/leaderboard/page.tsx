@@ -2,6 +2,8 @@ import { getLeaderboard } from '@/lib/queries'
 import { getSupabaseServerClient } from '@/lib/supabase'
 import LeaderboardClient from './LeaderboardClient'
 
+export const dynamic = 'force-dynamic'
+
 export default async function LeaderboardPage() {
   const supabase = getSupabaseServerClient()
   const [leaderboard, { data: lockSetting }] = await Promise.all([
