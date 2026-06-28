@@ -150,7 +150,7 @@ export default function HomeClient({ leaderboard }: Props) {
 
           {/* Row 2: 2×2 nav grid */}
           <div className="grid grid-cols-2 gap-6">
-            <NavTile href="/predict"     icon="ball"   category="PLAY"     title="Make Predictions" accent="#00ff87" />
+            <NavTile href="/predict/knockout"     icon="ball"   category="PLAY"     title="Make Predictions" accent="#00ff87" />
             <NavTile href="/leaderboard" icon="trophy" category="RANKINGS" title="Leaderboard"      accent="#ffd700" />
             <NavTile href="/community"   icon="eye"    category="BROWSE"   title="Community Picks"  accent="#b8c4d0" />
             <NavTile href="/standings"   icon="table"  category="TABLES"   title="Group Standings"  accent="#cd7f32" />
