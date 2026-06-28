@@ -8,13 +8,6 @@ import { getTeamData } from '@/lib/teams'
 import type { CommunityGame, CommunityPrediction } from './page'
 
 const GROUPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
-const KNOCKOUT_ROUNDS = [
-  { key: 'R32',  label: 'R32'   },
-  { key: 'R16',  label: 'R16'   },
-  { key: 'QF',   label: 'QF'    },
-  { key: 'SF',   label: 'SF'    },
-  { key: 'F',    label: 'Final' },
-]
 
 function formatDate(iso: string | null) {
   if (!iso) return ''
@@ -287,22 +280,15 @@ function GameListItem({
 // Main component
 // ----------------------------------------------------------------
 
-type StagePick = 'group' | 'knockout'
-
 export default function CommunityClient({ games }: { games: CommunityGame[] }) {
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
-  const [stagePick, setStagePick]         = useState<StagePick>('group')
   const [activeGroup, setActiveGroup]     = useState('A')
-  const [activeRound, setActiveRound]     = useState<'R32' | 'R16' | 'QF' | 'SF' | 'F'>('R32')
   const [selectedGameId, setSelectedGameId] = useState<string | null>(null)
   const [showDetail, setShowDetail]       = useState(false)
 
   useEffect(() => { setCurrentUserId(localStorage.getItem('wc_user_id')) }, [])
 
-  const visibleGames = games.filter(g => {
-    if (stagePick === 'group') return g.stage === 'group' && g.group_name === activeGroup
-    return g.stage === activeRound
-  })
+  const visibleGames = games.filter(g => g.stage === 'group' && g.group_name === activeGroup)
 
   useEffect(() => {
     if (visibleGames.length > 0) {
@@ -312,10 +298,9 @@ export default function CommunityClient({ games }: { games: CommunityGame[] }) {
       setSelectedGameId(null)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stagePick, activeGroup, activeRound])
+  }, [activeGroup])
 
-  const selectedGame    = games.find(g => g.id === selectedGameId) ?? null
-  const knockoutGames   = games.filter(g => g.stage !== 'group')
+  const selectedGame = games.find(g => g.id === selectedGameId) ?? null
 
   return (
     <div className="page-root">
@@ -329,62 +314,24 @@ export default function CommunityClient({ games }: { games: CommunityGame[] }) {
       </header>
 
       <div className="page-container py-6">
-        {/* Stage toggle */}
-        <div className="flex gap-2 mb-4">
-          {[
-            { key: 'group' as StagePick, label: 'Group Stage' },
-            { key: 'knockout' as StagePick, label: 'Knockout' },
-          ].map(s => (
-            <button
-              key={s.key}
-              onClick={() => { setStagePick(s.key); setShowDetail(false) }}
-              className={`px-4 py-2 rounded-sm text-[10px] font-bold uppercase tracking-wider transition-colors ${
-                stagePick === s.key
-                  ? 'bg-neon text-pitch-dark'
-                  : 'text-retro-muted border border-pitch-border hover:border-pitch-mid'
-              }`}
-            >
-              {s.label}
-              {s.key === 'knockout' && knockoutGames.length === 0 && (
-                <span className="ml-1.5 opacity-50">(none yet)</span>
-              )}
-            </button>
-          ))}
-        </div>
-
-        {/* Sub-tabs */}
+        {/* Group tabs */}
         <div className="flex gap-1.5 overflow-x-auto pb-2 mb-4">
-          {stagePick === 'group'
-            ? GROUPS.map(g => {
-                const hasResults = games.some(gm => gm.stage === 'group' && gm.group_name === g && gm.actual_home !== null)
-                return (
-                  <button
-                    key={g}
-                    onClick={() => setActiveGroup(g)}
-                    className={`retro-tab relative shrink-0 w-10 h-10 font-bold text-sm ${activeGroup === g ? 'active' : ''}`}
-                  >
-                    {g}
-                    {hasResults && (
-                      <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full"
-                        style={{ background: '#00ff87', boxShadow: '0 0 6px #00ff87' }} />
-                    )}
-                  </button>
-                )
-              })
-            : KNOCKOUT_ROUNDS.map(r => {
-                const count = games.filter(g => g.stage === r.key).length
-                return (
-                  <button
-                    key={r.key}
-                    onClick={() => setActiveRound(r.key as typeof activeRound)}
-                    className={`retro-tab shrink-0 px-4 h-10 font-bold text-sm ${activeRound === r.key ? 'active' : ''}`}
-                  >
-                    {r.label}
-                    {count > 0 && <span className="ml-1 text-[10px] opacity-75">({count})</span>}
-                  </button>
-                )
-              })
-          }
+          {GROUPS.map(g => {
+            const hasResults = games.some(gm => gm.stage === 'group' && gm.group_name === g && gm.actual_home !== null)
+            return (
+              <button
+                key={g}
+                onClick={() => setActiveGroup(g)}
+                className={`retro-tab relative shrink-0 w-10 h-10 font-bold text-sm ${activeGroup === g ? 'active' : ''}`}
+              >
+                {g}
+                {hasResults && (
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full"
+                    style={{ background: '#00ff87', boxShadow: '0 0 6px #00ff87' }} />
+                )}
+              </button>
+            )
+          })}
         </div>
 
         {/* 2-panel layout */}
