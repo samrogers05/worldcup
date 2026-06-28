@@ -1,6 +1,8 @@
 import { getSupabaseServerClient } from '@/lib/supabase'
 import KnockoutPredictClient from './KnockoutPredictClient'
 
+export const dynamic = 'force-dynamic'
+
 export type KnockoutGame = {
   id: string
   stage: 'R32' | 'R16' | 'QF' | 'SF' | 'F'
