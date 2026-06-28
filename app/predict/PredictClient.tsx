@@ -137,9 +137,15 @@ export default function PredictClient({ games, lockTime }: Props) {
       {/* Header */}
       <header className="retro-header px-6 py-8">
         <div className="page-container">
-          <a href="/" className="text-retro-muted text-base uppercase tracking-widest hover:text-neon transition-colors mb-3 inline-block">
-            ← Home
-          </a>
+          <div className="flex items-center gap-3 mb-3">
+            <a href="/" className="text-retro-muted text-base uppercase tracking-widest hover:text-neon transition-colors">
+              ← Home
+            </a>
+            <span className="text-pitch-border text-base">/</span>
+            <a href="/predict/knockout" className="text-retro-muted text-base uppercase tracking-widest hover:text-neon transition-colors">
+              Knockout Predictions →
+            </a>
+          </div>
           <h1 className="pixel-title text-retro-white">Group Stage Predictions</h1>
         </div>
       </header>
