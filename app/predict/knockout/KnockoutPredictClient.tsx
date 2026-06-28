@@ -201,20 +201,22 @@ export default function KnockoutPredictClient({
             </div>
           ) : (
             <>
-              {activeGames.map(game => (
-                <GameScoreInput
-                  key={game.id}
-                  homeTeam={game.home_team}
-                  awayTeam={game.away_team}
-                  kickoffTime={game.kickoff_time}
-                  homeValue={predictions[game.id]?.home ?? ''}
-                  awayValue={predictions[game.id]?.away ?? ''}
-                  locked={!isOpen}
-                  actualHome={game.actual_home}
-                  actualAway={game.actual_away}
-                  onChange={(home, away) => handleChange(game.id, home, away)}
-                />
-              ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+                {activeGames.map(game => (
+                  <GameScoreInput
+                    key={game.id}
+                    homeTeam={game.home_team}
+                    awayTeam={game.away_team}
+                    kickoffTime={game.kickoff_time}
+                    homeValue={predictions[game.id]?.home ?? ''}
+                    awayValue={predictions[game.id]?.away ?? ''}
+                    locked={!isOpen}
+                    actualHome={game.actual_home}
+                    actualAway={game.actual_away}
+                    onChange={(home, away) => handleChange(game.id, home, away)}
+                  />
+                ))}
+              </div>
 
               {isOpen && (
                 <div className="mt-5 flex items-center gap-3">
