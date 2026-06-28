@@ -201,10 +201,13 @@ export default function KnockoutPredictClient({
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
-                {activeGames.map(game => (
+              {activeGames.map((game, i) => (
+                <div
+                  key={game.id}
+                  className="px-3 py-3 rounded-sm"
+                  style={{ background: i % 2 === 1 ? 'rgba(255,255,255,0.04)' : 'transparent' }}
+                >
                   <GameScoreInput
-                    key={game.id}
                     homeTeam={game.home_team}
                     awayTeam={game.away_team}
                     kickoffTime={game.kickoff_time}
@@ -215,8 +218,8 @@ export default function KnockoutPredictClient({
                     actualAway={game.actual_away}
                     onChange={(home, away) => handleChange(game.id, home, away)}
                   />
-                ))}
-              </div>
+                </div>
+              ))}
 
               {isOpen && (
                 <div className="mt-5 flex items-center gap-3">
