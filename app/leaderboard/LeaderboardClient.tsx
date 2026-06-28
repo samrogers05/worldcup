@@ -5,12 +5,11 @@ import { getSupabaseBrowserClient } from '@/lib/supabase'
 import { getUserDrillDown } from '@/lib/queries'
 import type { LeaderboardEntry, DrillDownRow } from '@/lib/queries'
 
-type Filter = 'all' | 'group' | 'knockout'
+type Filter = 'all' | 'group'
 
 function sortedLeaderboard(entries: LeaderboardEntry[], filter: Filter): LeaderboardEntry[] {
   return [...entries].sort((a, b) => {
-    if (filter === 'group')    return b.groupPoints    - a.groupPoints    || a.name.localeCompare(b.name)
-    if (filter === 'knockout') return b.knockoutPoints - a.knockoutPoints || a.name.localeCompare(b.name)
+    if (filter === 'group') return b.groupPoints - a.groupPoints || a.name.localeCompare(b.name)
     return b.points - a.points || a.name.localeCompare(b.name)
   })
 }
@@ -27,17 +26,12 @@ function DrillDownModal({
   onClose: () => void
 }) {
   const [rows, setRows] = useState<DrillDownRow[] | null>(null)
-  const [filter, setFilter] = useState<Filter>('all')
 
   useEffect(() => {
     getUserDrillDown(entry.id, getSupabaseBrowserClient()).then(setRows)
   }, [entry.id])
 
-  const filtered = rows?.filter(r => {
-    if (filter === 'group')    return r.stage === 'group'
-    if (filter === 'knockout') return r.stage !== 'group'
-    return true
-  })
+  const filtered = rows?.filter(r => r.stage === 'group')
 
   const totalPts = filtered?.reduce((sum, r) => sum + (r.points ?? 0), 0) ?? 0
   const maxLeft  = filtered?.reduce((sum, r) => sum + (r.points === null ? 3 : 0), 0) ?? 0
@@ -79,27 +73,14 @@ function DrillDownModal({
           </button>
         </div>
 
-        {/* Filter tabs */}
-        <div className="flex gap-2 px-5 pt-3 pb-2 shrink-0">
-          {(['all', 'group', 'knockout'] as Filter[]).map(f => (
-            <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className={`px-3 py-1.5 rounded-sm text-[10px] font-bold uppercase tracking-wider transition-colors ${
-                filter === f
-                  ? 'bg-neon text-pitch-dark'
-                  : 'text-retro-muted border border-pitch-border hover:border-pitch-mid'
-              }`}
-            >
-              {f === 'all' ? 'All' : f === 'group' ? 'Group' : 'Knockout'}
-            </button>
-          ))}
-          {filtered && (
-            <span className="ml-auto orbitron text-[10px] text-retro-muted self-center">
+        {/* Points summary */}
+        {filtered && (
+          <div className="px-5 pt-3 pb-2 shrink-0">
+            <span className="orbitron text-[10px] text-retro-muted">
               {totalPts} pts{maxLeft > 0 ? ` · +${maxLeft} left` : ''}
             </span>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Table */}
         <div className="overflow-y-auto flex-1 px-5 pb-5">
@@ -227,7 +208,7 @@ export default function LeaderboardClient({ leaderboard, lockTime }: { leaderboa
           <div className="retro-card overflow-hidden">
             {/* Filter tabs */}
             <div className="flex border-b border-pitch-border">
-              {(['all', 'group', 'knockout'] as Filter[]).map(f => (
+              {(['all', 'group'] as Filter[]).map(f => (
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
@@ -237,7 +218,7 @@ export default function LeaderboardClient({ leaderboard, lockTime }: { leaderboa
                       : 'text-retro-muted hover:text-retro-white'
                   }`}
                 >
-                  {f === 'all' ? 'All' : f === 'group' ? 'Group' : 'Knockout'}
+                  {f === 'all' ? 'All' : 'Group'}
                 </button>
               ))}
             </div>
@@ -262,9 +243,7 @@ export default function LeaderboardClient({ leaderboard, lockTime }: { leaderboa
                 <tbody>
                   {sorted.map((entry, i) => {
                     const isYou = entry.id === currentUserId
-                    const pts   = filter === 'group'    ? entry.groupPoints
-                                : filter === 'knockout' ? entry.knockoutPoints
-                                : entry.points
+                    const pts   = filter === 'group' ? entry.groupPoints : entry.points
                     return (
                       <tr
                         key={entry.id}
@@ -289,7 +268,7 @@ export default function LeaderboardClient({ leaderboard, lockTime }: { leaderboa
                           </span>
                         </td>
                         <td className="py-2 sm:py-3 px-1 sm:px-2 text-right orbitron hidden sm:table-cell">
-                          <span className={`text-[24px] ${filter === 'knockout' ? 'text-retro-white font-bold' : 'text-retro-muted'}`}>
+                          <span className="text-[24px] text-retro-muted">
                             {entry.knockoutPoints}
                           </span>
                         </td>
